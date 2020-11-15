@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: paths.home,
     name: "Home",
-    component: import(/* webpackChunkName: "home" */ "./views/Home.vue")
+    component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue")
   },
   {
     path: paths.about,
