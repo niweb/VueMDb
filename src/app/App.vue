@@ -22,6 +22,10 @@ export default defineComponent({
         {
           name: "About",
           route: paths.about
+        },
+        {
+          name: "Most Popular Movies",
+          route: paths.movies.mostPopular
         }
       ]
     };

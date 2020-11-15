@@ -1,4 +1,7 @@
 export default {
   home: "/",
-  about: "/about"
+  about: "/about",
+  movies: {
+    mostPopular: "/movies/most-popular"
+  }
 };

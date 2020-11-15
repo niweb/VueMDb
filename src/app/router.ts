@@ -11,6 +11,14 @@ const routes: Array<RouteRecordRaw> = [
     path: paths.about,
     name: "About",
     component: () => import(/* webpackChunkName: "about" */ "./views/About.vue")
+  },
+  {
+    path: paths.movies.mostPopular,
+    name: "Most Popular Movies",
+    component: () =>
+      import(
+        /* webpackChunkName: "most-popular" */ "@/modules/movies/views/MostPopular.vue"
+      )
   }
 ];
 
