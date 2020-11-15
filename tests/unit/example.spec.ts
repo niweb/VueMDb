@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from "@vue/test-utils";
-import App from "@/App.vue";
+import App from "@/app/App.vue";
 import VueRouter from "vue-router";
-import router from "@/router";
+import router from "@/app/router";
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
