@@ -3,32 +3,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import Menubar from "primevue/menubar";
+import { defineComponent } from 'vue'
+import Menubar from 'primevue/menubar'
 
-import paths from "@/shared/paths";
+import paths from '@/shared/paths'
 
 export default defineComponent({
   components: {
-    Menubar
+    Menubar,
   },
   setup() {
     return {
       items: [
         {
-          label: "Home",
-          to: paths.home
+          label: 'Home',
+          to: paths.home,
         },
         {
-          label: "About",
-          to: paths.about
+          label: 'About',
+          to: paths.about,
         },
         {
-          label: "Most Popular Movies",
-          to: paths.movies.mostPopular
-        }
-      ]
-    };
-  }
-});
+          label: 'Most Popular Movies',
+          to: paths.movies.mostPopular,
+        },
+      ],
+    }
+  },
+})
 </script>
