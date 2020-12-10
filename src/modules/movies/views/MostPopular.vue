@@ -1,25 +1,27 @@
 <template>
   <h1>Most Popular Movies</h1>
-  <ProgressSpinner v-if="loading"></ProgressSpinner>
-  <ol v-else>
-    <li v-for="(movie, index) in movies" :key="index">
-      {{ movie.title }}
-    </li>
-  </ol>
+  <LoadingOverlay :active="loading">
+    <ol>
+      <li v-for="(movie, index) in movies" :key="index">
+        {{ movie.title }}
+      </li>
+    </ol>
+  </LoadingOverlay>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import ProgressSpinner from 'primevue/progressspinner'
 
 import { MODULES, namespaced } from '@/shared/constants/store-modules'
 import { GETTERS } from '@/modules/movies/store/getters'
 import { useMovieApi } from '@/modules/movies/functions/useMovieApi'
 
+import LoadingOverlay from '@/shared/components/loadingOverlay.vue'
+
 export default defineComponent({
   components: {
-    ProgressSpinner,
+    LoadingOverlay,
   },
   setup() {
     const { loading } = useMovieApi()
