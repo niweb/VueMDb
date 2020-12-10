@@ -6,7 +6,7 @@
 import { defineComponent } from 'vue'
 import Menubar from 'primevue/menubar'
 
-import paths from '@/shared/paths'
+import paths from '@/shared/constants/router-paths'
 
 export default defineComponent({
   components: {

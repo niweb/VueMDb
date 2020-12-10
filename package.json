@@ -10,6 +10,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/axios-case-converter": "^0.3.1",
+    "axios": "^0.21.0",
+    "axios-case-converter": "^0.6.0",
     "core-js": "^3.6.5",
     "primeicons": "^4.0.0",
     "primevue": "^3.0.1",
