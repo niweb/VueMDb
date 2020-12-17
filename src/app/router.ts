@@ -4,14 +4,7 @@ import paths from '@/shared/constants/router-paths'
 const routes: Array<RouteRecordRaw> = [
   {
     path: paths.home,
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "home" */ './views/Home.vue'),
-  },
-  {
-    path: paths.about,
-    name: 'About',
-    component: () =>
-      import(/* webpackChunkName: "about" */ './views/About.vue'),
+    redirect: paths.movies.mostPopular,
   },
   {
     path: paths.movies.mostPopular,

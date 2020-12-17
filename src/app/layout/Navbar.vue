@@ -16,14 +16,6 @@ export default defineComponent({
     return {
       items: [
         {
-          label: 'Home',
-          to: paths.home,
-        },
-        {
-          label: 'About',
-          to: paths.about,
-        },
-        {
           label: 'Most Popular Movies',
           to: paths.movies.mostPopular,
         },
