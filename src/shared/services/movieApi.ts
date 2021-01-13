@@ -10,8 +10,8 @@ const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p'
 export type MultiPageResponse<Item> = {
   page: number
   results: Item[]
-  total_pages: number
-  total_results: number
+  totalPages: number
+  totalResults: number
 }
 
 export const movieApi = applyCaseMiddleware(

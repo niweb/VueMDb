@@ -1,18 +1,27 @@
 import { ref } from 'vue'
-import { useStore } from 'vuex'
-import { MODULES, namespaced } from '@/shared/constants/store-modules'
-import { ACTIONS } from '@/modules/movies/store/actions'
+import useSWRV from 'swrv'
+import { movieApi, MultiPageResponse } from '@/shared/services/movieApi'
+import { Movie } from '@/modules/movies/types'
 
-export const useMovieApi = () => {
+export const useMovieApi = (endpoint: string) => {
   const loading = ref(true)
-  const store = useStore()
 
-  const actionName = namespaced(MODULES.MOVIES, ACTIONS.LOAD)
-  store.dispatch(actionName, 'movie/popular').then(() => {
-    loading.value = false
-  })
+  const { data, error } = useSWRV(
+    endpoint,
+    async key => {
+      const response = await movieApi.get<MultiPageResponse<Movie>>(key)
+      loading.value = false
+      return response.data
+    },
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 10000,
+    }
+  )
 
   return {
     loading,
+    error,
+    data,
   }
 }

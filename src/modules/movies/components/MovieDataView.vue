@@ -89,6 +89,16 @@ export default defineComponent({
       required: false,
       default: [],
     },
+    page: {
+      type: Number,
+      required: false,
+      default: 1,
+    },
+    totalPages: {
+      type: Number,
+      required: false,
+      default: 1,
+    },
   },
   components: {
     DataView,
@@ -100,9 +110,7 @@ export default defineComponent({
   },
   setup() {
     const layout = ref('grid')
-
     return {
-      page: 0,
       layout,
     }
   },

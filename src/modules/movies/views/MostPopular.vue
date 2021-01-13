@@ -1,16 +1,15 @@
 <template>
   <h1>Most Popular Movies</h1>
   <LoadingOverlay :active="loading">
-    <MovieDataView :movies="movies"></MovieDataView>
+    <div v-if="error">
+      {{ error }}
+    </div>
+    <MovieDataView :movies="data?.results" :page="data?.page"></MovieDataView>
   </LoadingOverlay>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { useStore } from 'vuex'
-
-import { MODULES, namespaced } from '@/shared/constants/store-modules'
-import { GETTERS } from '@/modules/movies/store/getters'
+import { defineComponent } from 'vue'
 import { useMovieApi } from '@/modules/movies/functions/useMovieApi'
 
 import MovieDataView from '@/modules/movies/components/MovieDataView.vue'
@@ -22,15 +21,12 @@ export default defineComponent({
     MovieDataView,
   },
   setup() {
-    const { loading } = useMovieApi()
-    const { getters } = useStore()
-    const movies = computed(
-      () => getters[namespaced(MODULES.MOVIES, GETTERS.GET_ALL)]
-    )
+    const { data, error, loading } = useMovieApi('movie/popular')
+
     return {
-      page: 0,
       loading,
-      movies,
+      error,
+      data,
     }
   },
 })
