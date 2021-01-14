@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Most Popular Movies',
     component: () =>
       import(
-        /* webpackChunkName: "most-popular" */ '@/modules/movies/views/MostPopular.vue'
+        /* webpackChunkName: "most-popular" */ '@/modules/movies/views/MovieCollection.vue'
       ),
   },
 ]

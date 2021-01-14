@@ -14,6 +14,12 @@ export type MultiPageResponse<Item> = {
   totalResults: number
 }
 
+export type MultiPageRequestOptions = {
+  language?: string
+  page?: number
+  region?: string
+}
+
 export const movieApi = applyCaseMiddleware(
   axios.create({
     baseURL: BASE_URL,
