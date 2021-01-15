@@ -1,22 +1,17 @@
 import { ref } from 'vue'
 import useSWRV from 'swrv'
-import {
-  movieApi,
-  MultiPageRequestOptions,
-  MultiPageResponse,
-} from '@/shared/services/movieApi'
-import { Movie } from '@/modules/movies/types'
+import { movieApi, RequestOptions } from '@/shared/services/movieApi'
 
-export const useMovieApi = (
+export const useMovieApi = <Response>(
   endpoint: string,
-  options?: MultiPageRequestOptions
+  options?: RequestOptions
 ) => {
   const loading = ref(true)
 
   const { data, error } = useSWRV(
-    () => `${endpoint}/${options?.page}`,
+    () => `${endpoint}/${JSON.stringify(options)}`,
     async () => {
-      const response = await movieApi.get<MultiPageResponse<Movie>>(endpoint, {
+      const response = await movieApi.get<Response>(endpoint, {
         params: options,
       })
       loading.value = false

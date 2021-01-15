@@ -1,6 +1,8 @@
-export default {
+export const PATH_NAMES = {
   HOME: 'HOME',
+
   /** Movies */
+  MOVIE: 'MOVIE',
   MOVIES: 'MOVIES',
   /** Collections */
   NOW_PLAYING: 'NOW_PLAYING',

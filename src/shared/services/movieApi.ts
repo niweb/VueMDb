@@ -14,11 +14,10 @@ export type MultiPageResponse<Item> = {
   totalResults: number
 }
 
-export type MultiPageRequestOptions = {
+export type RequestOptions = Partial<{
   language?: string
   page?: number
-  region?: string
-}
+}>
 
 export const movieApi = applyCaseMiddleware(
   axios.create({

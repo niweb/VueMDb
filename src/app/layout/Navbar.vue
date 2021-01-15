@@ -11,7 +11,7 @@
 import { defineComponent, reactive } from 'vue'
 import Menubar from 'primevue/menubar'
 
-import NAMES from '@/shared/constants/router-names'
+import { PATH_NAMES } from '@/shared/constants/path-names'
 
 export default defineComponent({
   components: {
@@ -25,19 +25,19 @@ export default defineComponent({
           items: [
             {
               label: 'Now Playing',
-              to: { name: NAMES.NOW_PLAYING },
+              to: { name: PATH_NAMES.NOW_PLAYING },
             },
             {
               label: 'Popular',
-              to: { name: NAMES.POPULAR },
+              to: { name: PATH_NAMES.POPULAR },
             },
             {
               label: 'Top Rated',
-              to: { name: NAMES.TOP_RATED },
+              to: { name: PATH_NAMES.TOP_RATED },
             },
             {
               label: 'Upcoming',
-              to: { name: NAMES.UPCOMING },
+              to: { name: PATH_NAMES.UPCOMING },
             },
           ],
         },

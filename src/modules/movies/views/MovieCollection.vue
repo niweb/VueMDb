@@ -41,6 +41,8 @@ import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'
 import { useMovieApi } from '@/modules/movies/functions/useMovieApi'
 import MovieList from '@/modules/movies/components/MovieList.vue'
 import MovieGrid from '@/modules/movies/components/MovieGrid.vue'
+import { MultiPageResponse } from '@/shared/services/movieApi'
+import { PartialMovie } from '@/modules/movies/types'
 
 export default defineComponent({
   props: {
@@ -64,7 +66,9 @@ export default defineComponent({
   setup(props) {
     const page = ref(1)
 
-    const { data, error, loading } = useMovieApi(
+    const { data, error, loading } = useMovieApi<
+      MultiPageResponse<PartialMovie>
+    >(
       props.endpoint,
       reactive({
         page,

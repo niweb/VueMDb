@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import NAMES from '@/shared/constants/router-names'
+import { PATH_NAMES } from '@/shared/constants/path-names'
 
 const MovieCollection = () =>
   import(
@@ -14,17 +14,25 @@ const EmptyComponent = () =>
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: NAMES.HOME,
-    redirect: { name: NAMES.POPULAR },
+    name: PATH_NAMES.HOME,
+    redirect: { name: PATH_NAMES.POPULAR },
+  },
+  {
+    path: '/movie/:id',
+    name: PATH_NAMES.MOVIE,
+    component: import(
+      /* webpackChunkName: "movie-detail" */ '@/modules/movies/views/MovieDetail.vue'
+    ),
+    props: true,
   },
   {
     path: '/movies',
-    name: NAMES.MOVIES,
+    name: PATH_NAMES.MOVIES,
     component: EmptyComponent,
     children: [
       {
         path: 'popular',
-        name: NAMES.POPULAR,
+        name: PATH_NAMES.POPULAR,
         component: MovieCollection,
         props: {
           title: 'Popular Movies',
@@ -34,7 +42,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'now-playing',
-        name: NAMES.NOW_PLAYING,
+        name: PATH_NAMES.NOW_PLAYING,
         component: MovieCollection,
         props: {
           title: 'Now Playing Movies',
@@ -44,7 +52,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'top-rated',
-        name: NAMES.TOP_RATED,
+        name: PATH_NAMES.TOP_RATED,
         component: MovieCollection,
         props: {
           title: 'Top Rated Movies',
@@ -54,7 +62,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'upcoming',
-        name: NAMES.UPCOMING,
+        name: PATH_NAMES.UPCOMING,
         component: MovieCollection,
         props: {
           title: 'Upcoming Movies',

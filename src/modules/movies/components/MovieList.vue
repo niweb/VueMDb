@@ -33,13 +33,13 @@ import { defineComponent, PropType } from 'vue'
 import Rating from 'primevue/rating'
 import Tag from 'primevue/tag'
 
-import { Movie } from '@/modules/movies/types'
+import { PartialMovie } from '@/modules/movies/types'
 import Poster from '@/modules/movies/components/Poster.vue'
 
 export default defineComponent({
   props: {
     movie: {
-      type: Object as PropType<Movie>,
+      type: Object as PropType<PartialMovie>,
       required: true,
     },
   },
