@@ -3,18 +3,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref } from 'vue'
 import { getImagePath, ImagePath } from '@/shared/services/movieApi'
 
 export default defineComponent({
   props: {
     path: {
       type: String as PropType<ImagePath>,
-      required: true,
+      required: false,
     },
     title: {
       type: String,
-      required: false,
+      required: true,
     },
     width: {
       type: Number,
@@ -24,8 +24,19 @@ export default defineComponent({
   },
 
   setup(props) {
+    const src = ref('')
+
+    if (props.path) {
+      src.value = getImagePath(props.path, { width: props.width })
+    } else {
+      const backgroundColor = '212529'
+      const textColor = 'e9ecef'
+      const height = props.width * 1.5
+      src.value = `https://via.placeholder.com/${props.width}x${height}/${backgroundColor}/${textColor}?text=${props.title}`
+    }
+
     return {
-      src: getImagePath(props.path, { width: props.width }),
+      src,
       alt: 'Poster' + (props.title && ` of ${props.title}`),
     }
   },
