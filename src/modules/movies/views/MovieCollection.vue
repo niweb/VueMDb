@@ -2,7 +2,6 @@
   <div v-if="error">
     {{ error }}
   </div>
-  <!-- TODO: reactive "value" does not rerender component! -->
   <DataView
     :layout="layout"
     :value="movies"
@@ -25,10 +24,10 @@
       </div>
     </template>
     <template #list="{data}">
-      <MovieList :movie="data"></MovieList>
+      <MovieList :movie="data" :key="data.id"></MovieList>
     </template>
     <template #grid="{ data }">
-      <MovieGrid :movie="data"></MovieGrid>
+      <MovieGrid :movie="data" :key="data.id"></MovieGrid>
     </template>
   </DataView>
 </template>
