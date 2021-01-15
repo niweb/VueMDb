@@ -1,12 +1,17 @@
 <template>
-  <Menubar :model="items"></Menubar>
+  <Menubar :model="items">
+    <template #start>
+      <!--      <img src="https://www.codeapi.io/initials/V?gradient=43aa8b,577590,45&shape=circle&weight=900" />-->
+      <h1 class="p-mx-4">🦥 WuMBD</h1>
+    </template>
+  </Menubar>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, reactive } from 'vue'
 import Menubar from 'primevue/menubar'
 
-import paths from '@/shared/constants/router-paths'
+import NAMES from '@/shared/constants/router-names'
 
 export default defineComponent({
   components: {
@@ -14,12 +19,29 @@ export default defineComponent({
   },
   setup() {
     return {
-      items: [
+      items: reactive([
         {
-          label: 'Most Popular Movies',
-          to: paths.movies.mostPopular,
+          label: 'Movies',
+          items: [
+            {
+              label: 'Now Playing',
+              to: { name: NAMES.NOW_PLAYING },
+            },
+            {
+              label: 'Popular',
+              to: { name: NAMES.POPULAR },
+            },
+            {
+              label: 'Top Rated',
+              to: { name: NAMES.TOP_RATED },
+            },
+            {
+              label: 'Upcoming',
+              to: { name: NAMES.UPCOMING },
+            },
+          ],
         },
-      ],
+      ]),
     }
   },
 })

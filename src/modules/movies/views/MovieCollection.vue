@@ -24,10 +24,10 @@
       </div>
     </template>
     <template #list="{data}">
-      <MovieList :movie="data" :key="data.id"></MovieList>
+      <MovieList :movie="data" :key="`${data.id}`"></MovieList>
     </template>
     <template #grid="{ data }">
-      <MovieGrid :movie="data" :key="data.id"></MovieGrid>
+      <MovieGrid :movie="data" :key="`${data.id}`"></MovieGrid>
     </template>
   </DataView>
 </template>
@@ -46,14 +46,11 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      required: false,
-      default: 'Popular movies',
+      required: true,
     },
-
     endpoint: {
       type: String,
-      required: false,
-      default: 'movie/popular',
+      required: true,
     },
   },
 
