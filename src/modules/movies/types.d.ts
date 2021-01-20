@@ -35,19 +35,19 @@ enum Status {
 
 export type PartialMovie = Pick<
   FullMovie,
-  'adult',
-  'backdropPath',
-  'id',
-  'originalLanguage',
-  'originalTitle',
-  'overview',
-  'popularity',
-  'posterPath',
-  'releaseDate',
-  'title',
-  'video',
-  'voteAverage',
-  'voteCount'
+  | 'adult'
+  | 'backdropPath'
+  | 'id'
+  | 'originalLanguage'
+  | 'originalTitle'
+  | 'overview'
+  | 'popularity'
+  | 'posterPath'
+  | 'releaseDate'
+  | 'title'
+  | 'video'
+  | 'voteAverage'
+  | 'voteCount'
 > & {
   genreIds: Genre['id'][]
 }
