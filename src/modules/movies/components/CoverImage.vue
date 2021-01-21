@@ -27,7 +27,9 @@ export default defineComponent({
   },
 
   setup(props) {
-    const src = computed(() => getImagePath(props.path, { width: 500 }))
+    const src = computed(() =>
+      props.path ? getImagePath(props.path, { width: 500 }) : null
+    )
 
     return {
       src,
