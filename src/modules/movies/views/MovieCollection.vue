@@ -27,7 +27,11 @@
       <MovieList :movie="data" :key="`${data.id}`"></MovieList>
     </template>
     <template #grid="{ data }">
-      <MovieGrid :movie="data" :key="`${data.id}`"></MovieGrid>
+      <MovieGridItem
+        class="p-mx-4 p-my-2"
+        :movie="data"
+        :key="`${data.id}`"
+      ></MovieGridItem>
     </template>
   </DataView>
 </template>
@@ -40,7 +44,7 @@ import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'
 
 import { useMovieApi } from '@/modules/movies/functions/useMovieApi'
 import MovieList from '@/modules/movies/components/MovieList.vue'
-import MovieGrid from '@/modules/movies/components/MovieGrid.vue'
+import MovieGridItem from '@/modules/movies/components/MovieGridItem.vue'
 import { MultiPageResponse } from '@/shared/services/movieApi'
 import { PartialMovie } from '@/modules/movies/types'
 
@@ -60,7 +64,7 @@ export default defineComponent({
     DataView,
     DataViewLayoutOptions,
     MovieList,
-    MovieGrid,
+    MovieGridItem,
   },
 
   setup(props) {
