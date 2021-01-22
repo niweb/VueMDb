@@ -15,8 +15,13 @@
               <span class="year">({{ data.releaseDate.split('-')[0] }})</span>
             </h2>
           </div>
-          <h3 class="p-mt-0">{{ data.tagline }}</h3>
-          <p class="p-mt-5">{{ data.overview }}</p>
+          <h3 v-if="data.tagline" class="tagline p-mt-0 p-mb-2">
+            “{{ data.tagline }}”
+          </h3>
+          <div>
+            <Score class="score" :percent="score"></Score>
+          </div>
+          <p class="p-mt-3">{{ data.overview }}</p>
         </div>
       </div>
     </CoverImage>
@@ -25,12 +30,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 
 import { useMovieApi } from '@/modules/movies/functions/useMovieApi'
 import { FullMovie } from '@/modules/movies/types'
 import Poster from '@/modules/movies/components/Poster.vue'
 import CoverImage from '@/modules/movies/components/CoverImage.vue'
+import Score from '@/modules/movies/components/Score.vue'
 
 export default defineComponent({
   props: {
@@ -43,6 +49,7 @@ export default defineComponent({
   components: {
     CoverImage,
     Poster,
+    Score,
   },
 
   setup(props) {
@@ -56,6 +63,7 @@ export default defineComponent({
       data,
       error,
       loading,
+      score: computed(() => (data.value ? data.value.voteAverage * 10 : 0)),
     }
   },
 })
@@ -64,9 +72,18 @@ export default defineComponent({
 <style scoped lang="stylus">
 .title
   font-weight 800
+  font-size 3rem
+
 .year
   font-weight 200
 
+.tagline
+  font-weight 200
+  font-size 1.5rem
+
 .poster
   border 5px solid white
+
+.score
+  width 60px
 </style>

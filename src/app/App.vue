@@ -18,7 +18,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
 #app
   font-family 'Source Sans Pro', Arial, sans-serif
   -webkit-font-smoothing antialiased

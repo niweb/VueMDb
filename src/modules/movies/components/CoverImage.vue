@@ -38,7 +38,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
 .root
   position relative
   color white

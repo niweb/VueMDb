@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<style lang="stylus" scoped>
+<style scoped lang="stylus">
 .container
   position relative
   width 90%
