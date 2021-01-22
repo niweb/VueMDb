@@ -60,11 +60,11 @@ export default defineComponent({
 
   setup(props) {
     const { percent } = toRefs(props)
-    const path = ref('path')
-    const totalPathLength = ref(null)
+    const path = ref<SVGPathElement | null>(null)
+    const totalPathLength = ref(0)
 
     onMounted(() => {
-      totalPathLength.value = path.value.getTotalLength()
+      totalPathLength.value = path.value?.getTotalLength() || NaN
     })
 
     const rating = computed(() => {
