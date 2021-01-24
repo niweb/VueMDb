@@ -20,9 +20,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/movie/:id',
     name: PATH_NAMES.MOVIE,
-    component: import(
-      /* webpackChunkName: "movie-detail" */ '@/modules/movies/views/MovieDetail.vue'
-    ),
+    component: () =>
+      import(
+        /* webpackChunkName: "movie-detail" */ '@/modules/movies/views/MovieDetail.vue'
+      ),
     props: true,
   },
   {
