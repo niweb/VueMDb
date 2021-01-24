@@ -1,5 +1,6 @@
 export const PATH_NAMES = {
   HOME: 'HOME',
+  NOT_FOUND: 'NOT_FOUND',
 
   /** Movies */
   MOVIE: 'MOVIE',

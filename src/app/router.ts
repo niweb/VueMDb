@@ -73,6 +73,14 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    // https://next.router.vuejs.org/guide/migration/#removed-star-or-catch-all-routes
+    path: '/:pathMatch(.*)*',
+    name: PATH_NAMES.NOT_FOUND,
+    component: () =>
+      import(/* webpackChunkName: "404" */ '@/shared/views/404.vue'),
+    props: true,
+  },
 ]
 
 const router = createRouter({
