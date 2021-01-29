@@ -11,6 +11,7 @@ export default defineComponent({
     path: {
       type: String as PropType<ImagePath>,
       required: false,
+      default: null,
     },
     title: {
       type: String,

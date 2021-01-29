@@ -8,9 +8,9 @@
     :rows="movies?.length"
     :lazy="true"
     :loading="loading"
-    :totalRecords="total"
+    :total-records="total"
     :paginator="true"
-    paginatorPosition="both"
+    paginator-position="both"
     @page="page = $event.page + 1"
   >
     <template #header>
@@ -24,13 +24,13 @@
       </div>
     </template>
     <template #list="{ data }">
-      <MovieList :movie="data" :key="`${data.id}`"></MovieList>
+      <MovieList :key="`${data.id}`" :movie="data"></MovieList>
     </template>
     <template #grid="{ data }">
       <MovieGridItem
+        :key="`${data.id}`"
         class="p-mx-4 p-my-2"
         :movie="data"
-        :key="`${data.id}`"
       ></MovieGridItem>
     </template>
   </DataView>
@@ -49,6 +49,12 @@ import { MultiPageResponse } from '@/shared/services/movieApi'
 import { PartialMovie } from '@/modules/movies/types'
 
 export default defineComponent({
+  components: {
+    DataView,
+    DataViewLayoutOptions,
+    MovieList,
+    MovieGridItem,
+  },
   props: {
     title: {
       type: String,
@@ -58,13 +64,6 @@ export default defineComponent({
       type: String,
       required: true,
     },
-  },
-
-  components: {
-    DataView,
-    DataViewLayoutOptions,
-    MovieList,
-    MovieGridItem,
   },
 
   setup(props) {

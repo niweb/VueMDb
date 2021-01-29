@@ -24,16 +24,16 @@ import { PATH_NAMES } from '@/shared/constants/path-names'
 import Score from '@/modules/movies/components/Score.vue'
 
 export default defineComponent({
+  components: {
+    Poster,
+    Score,
+  },
+
   props: {
     movie: {
       type: Object as PropType<PartialMovie>,
       required: true,
     },
-  },
-
-  components: {
-    Poster,
-    Score,
   },
 
   setup(props) {

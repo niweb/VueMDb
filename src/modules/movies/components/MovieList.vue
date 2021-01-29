@@ -14,7 +14,7 @@
         </div>
         <div class="p-d-inline-flex p-ai-center">
           <Rating
-            :modelValue="Math.round(movie.voteAverage / 2)"
+            :model-value="Math.round(movie.voteAverage / 2)"
             :readonly="true"
             :cancel="false"
           ></Rating>
@@ -37,17 +37,17 @@ import { PartialMovie } from '@/modules/movies/types'
 import Poster from '@/modules/movies/components/Poster.vue'
 
 export default defineComponent({
+  components: {
+    Poster,
+    Rating,
+    Tag,
+  },
+
   props: {
     movie: {
       type: Object as PropType<PartialMovie>,
       required: true,
     },
-  },
-
-  components: {
-    Poster,
-    Rating,
-    Tag,
   },
 })
 </script>

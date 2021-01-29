@@ -39,17 +39,16 @@ import CoverImage from '@/modules/movies/components/CoverImage.vue'
 import Score from '@/modules/movies/components/Score.vue'
 
 export default defineComponent({
+  components: {
+    CoverImage,
+    Poster,
+    Score,
+  },
   props: {
     id: {
       type: Number,
       required: true,
     },
-  },
-
-  components: {
-    CoverImage,
-    Poster,
-    Score,
   },
 
   setup(props) {
