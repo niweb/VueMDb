@@ -33,7 +33,10 @@ type ImagePathOptions = {
   width?: number
 }
 
-export const getImagePath = (path: ImagePath, options?: ImagePathOptions) => {
+export const getImagePath = (
+  path: ImagePath,
+  options?: ImagePathOptions
+): string => {
   const imageName = path.startsWith('/') ? path.substring(1) : path
   const width = options?.hq ? 'original' : `w${options?.width || 500}`
   return `${IMAGE_BASE_URL}/${width}/${imageName}`

@@ -1,11 +1,17 @@
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 import useSWRV from 'swrv'
 import { movieApi, RequestOptions } from '@/shared/services/movieApi'
 
-export const useMovieApi = <Response>(
+type HookData<Data, Error> = {
+  loading: Ref<boolean>
+  data: Ref<Data | undefined>
+  error: Ref<Error | undefined>
+}
+
+export const useMovieApi = <Response, Error = unknown>(
   endpoint: string,
   options?: RequestOptions
-) => {
+): HookData<Response, Error> => {
   const loading = ref(true)
 
   const { data, error } = useSWRV(

@@ -15,7 +15,9 @@ import Button from 'primevue/button'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 
-const primeVueTheme = (app: App) => {
+type Plugin = Parameters<App['use']>[0]
+
+const primeVueTheme: Plugin = (app) => {
   // app.use(PrimeVue)
 
   app.component('Button', Button)
