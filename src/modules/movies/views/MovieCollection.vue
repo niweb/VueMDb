@@ -23,7 +23,7 @@
         </div>
       </div>
     </template>
-    <template #list="{data}">
+    <template #list="{ data }">
       <MovieList :movie="data" :key="`${data.id}`"></MovieList>
     </template>
     <template #grid="{ data }">

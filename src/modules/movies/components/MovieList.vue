@@ -2,7 +2,7 @@
   <div class="p-col-12">
     <div class="product-list-item p-d-flex p-p-4">
       <Poster
-        style="height: 200px;"
+        style="height: 200px"
         :path="movie.posterPath"
         :title="movie.title"
         class="p-shadow-8 p-mr-4"

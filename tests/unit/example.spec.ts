@@ -1,15 +1,15 @@
-import { mount, createLocalVue } from "@vue/test-utils";
-import App from "@/app/App.vue";
-import VueRouter from "vue-router";
-import router from "@/app/router";
+import { mount, createLocalVue } from '@vue/test-utils'
+import App from '@/app/App.vue'
+import VueRouter from 'vue-router'
+import router from '@/app/router'
 
-const localVue = createLocalVue();
-localVue.use(VueRouter);
+const localVue = createLocalVue()
+localVue.use(VueRouter)
 
-test("App should render default route", () => {
+test('App should render default route', () => {
   const wrapper = mount(App, {
     localVue,
-    router
-  });
-  expect(wrapper.text()).toMatch(`Welcome to Your Vue.js App`);
-});
+    router,
+  })
+  expect(wrapper.text()).toMatch(`Welcome to Your Vue.js App`)
+})
