@@ -1,25 +1,39 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import {
+  debouncedWatch,
+  useElementSize,
+  useWindowScroll,
+  useWindowSize,
+} from '@vueuse/core'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  props: {},
-  emits: { foo: null },
+  emits: { infiniteScroll: null },
 
   setup(props, { emit }) {
-    return {
-      onScroll(e: Event) {
-        console.log('onScroll', e)
-        emit('foo')
+    const el = ref(null)
+    const { y } = useWindowScroll()
+    const { height: windowHeight } = useWindowSize()
+    const { height: documentHeight } = useElementSize(document.body)
+    const scrollPosition = computed(() => y.value + windowHeight.value)
+
+    debouncedWatch(
+      [scrollPosition, documentHeight],
+      () => {
+        if (scrollPosition.value >= documentHeight.value) {
+          emit('infiniteScroll')
+        }
       },
+      { debounce: 500 }
+    )
+
+    return {
+      el,
     }
   },
 })
 </script>
 
 <template>
-  <div @scroll="onScroll">
-    <slot></slot>
-  </div>
+  <slot></slot>
 </template>
-
-<style scoped lang="stylus"></style>

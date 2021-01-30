@@ -39,7 +39,7 @@ export default defineComponent({
       <Poster
         :path="movie.posterPath"
         :title="movie.title"
-        :width="200"
+        :width="500"
       ></Poster>
     </router-link>
     <div class="content">
@@ -51,7 +51,7 @@ export default defineComponent({
 
 <style scoped lang="stylus">
 .card
-  width 200px
+  max-width 500px
   border-radius 10px
 
 .content

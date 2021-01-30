@@ -45,3 +45,8 @@ export default defineComponent({
 <template>
   <img :src="src" :alt="alt" />
 </template>
+
+<style lang="stylus">
+img
+  max-width 100%
+</style>
