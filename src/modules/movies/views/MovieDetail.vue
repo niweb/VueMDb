@@ -1,3 +1,43 @@
+<script lang="ts">
+import { computed, defineComponent, ref } from 'vue'
+
+import { useMovieApi } from '@/modules/movies/functions/useMovieApi'
+import { FullMovie } from '@/modules/movies/types'
+import Poster from '@/modules/movies/components/Poster.vue'
+import CoverImage from '@/modules/movies/components/CoverImage.vue'
+import Score from '@/modules/movies/components/Score.vue'
+
+export default defineComponent({
+  components: {
+    CoverImage,
+    Poster,
+    Score,
+  },
+
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+  },
+
+  setup(props) {
+    const root = ref(null)
+    const { data, error, loading } = useMovieApi<FullMovie>(
+      `/movie/${props.id}`
+    )
+
+    return {
+      root,
+      data,
+      error,
+      loading,
+      score: computed(() => (data.value ? data.value.voteAverage * 10 : 0)),
+    }
+  },
+})
+</script>
+
 <template>
   <template v-if="data">
     <CoverImage :path="data.backdropPath">
@@ -28,45 +68,6 @@
     <pre>{{ data }}</pre>
   </template>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
-
-import { useMovieApi } from '@/modules/movies/functions/useMovieApi'
-import { FullMovie } from '@/modules/movies/types'
-import Poster from '@/modules/movies/components/Poster.vue'
-import CoverImage from '@/modules/movies/components/CoverImage.vue'
-import Score from '@/modules/movies/components/Score.vue'
-
-export default defineComponent({
-  components: {
-    CoverImage,
-    Poster,
-    Score,
-  },
-  props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-  },
-
-  setup(props) {
-    const root = ref(null)
-    const { data, error, loading } = useMovieApi<FullMovie>(
-      `/movie/${props.id}`
-    )
-
-    return {
-      root,
-      data,
-      error,
-      loading,
-      score: computed(() => (data.value ? data.value.voteAverage * 10 : 0)),
-    }
-  },
-})
-</script>
 
 <style scoped lang="stylus">
 .title

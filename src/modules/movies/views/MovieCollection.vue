@@ -1,3 +1,59 @@
+<script lang="ts">
+import { computed, defineComponent, reactive, ref } from 'vue'
+
+import DataView from 'primevue/dataview'
+import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'
+
+import { useMovieApi } from '@/modules/movies/functions/useMovieApi'
+import MovieList from '@/modules/movies/components/MovieList.vue'
+import MovieGridItem from '@/modules/movies/components/MovieGridItem.vue'
+import { MultiPageResponse } from '@/shared/services/movieApi'
+import { PartialMovie } from '@/modules/movies/types'
+
+export default defineComponent({
+  components: {
+    DataView,
+    DataViewLayoutOptions,
+    MovieList,
+    MovieGridItem,
+  },
+
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+
+    endpoint: {
+      type: String,
+      required: true,
+    },
+  },
+
+  setup(props) {
+    const page = ref(1)
+
+    const { data, error, loading } = useMovieApi<
+      MultiPageResponse<PartialMovie>
+    >(
+      props.endpoint,
+      reactive({
+        page,
+      })
+    )
+
+    return {
+      layout: ref('grid'),
+      movies: computed(() => data.value?.results),
+      total: computed(() => data.value?.totalResults),
+      error,
+      loading,
+      page,
+    }
+  },
+})
+</script>
+
 <template>
   <div v-if="error">
     {{ error }}
@@ -35,57 +91,3 @@
     </template>
   </DataView>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, reactive, computed } from 'vue'
-
-import DataView from 'primevue/dataview'
-import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'
-
-import { useMovieApi } from '@/modules/movies/functions/useMovieApi'
-import MovieList from '@/modules/movies/components/MovieList.vue'
-import MovieGridItem from '@/modules/movies/components/MovieGridItem.vue'
-import { MultiPageResponse } from '@/shared/services/movieApi'
-import { PartialMovie } from '@/modules/movies/types'
-
-export default defineComponent({
-  components: {
-    DataView,
-    DataViewLayoutOptions,
-    MovieList,
-    MovieGridItem,
-  },
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    endpoint: {
-      type: String,
-      required: true,
-    },
-  },
-
-  setup(props) {
-    const page = ref(1)
-
-    const { data, error, loading } = useMovieApi<
-      MultiPageResponse<PartialMovie>
-    >(
-      props.endpoint,
-      reactive({
-        page,
-      })
-    )
-
-    return {
-      layout: ref('grid'),
-      movies: computed(() => data.value?.results),
-      total: computed(() => data.value?.totalResults),
-      error,
-      loading,
-      page,
-    }
-  },
-})
-</script>

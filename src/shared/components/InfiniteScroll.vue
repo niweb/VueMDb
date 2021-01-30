@@ -1,9 +1,3 @@
-<template>
-  <div @scroll="onScroll">
-    <slot></slot>
-  </div>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
@@ -21,5 +15,11 @@ export default defineComponent({
   },
 })
 </script>
+
+<template>
+  <div @scroll="onScroll">
+    <slot></slot>
+  </div>
+</template>
 
 <style scoped lang="stylus"></style>

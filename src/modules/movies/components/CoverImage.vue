@@ -1,14 +1,3 @@
-<template>
-  <div
-    class="root"
-    :style="{ '--image': `url(${src})`, '--color': fallbackColor }"
-  >
-    <div class="content">
-      <slot></slot>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import { getImagePath, ImagePath } from '@/shared/services/movieApi'
@@ -20,6 +9,7 @@ export default defineComponent({
       required: false,
       default: null,
     },
+
     fallbackColor: {
       type: String,
       required: false,
@@ -38,6 +28,17 @@ export default defineComponent({
   },
 })
 </script>
+
+<template>
+  <div
+    class="root"
+    :style="{ '--image': `url(${src})`, '--color': fallbackColor }"
+  >
+    <div class="content">
+      <slot></slot>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="stylus">
 .root

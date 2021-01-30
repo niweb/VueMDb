@@ -1,12 +1,3 @@
-<template>
-  <Menubar :model="items">
-    <template #start>
-      <!--      <img src="https://www.codeapi.io/initials/V?gradient=43aa8b,577590,45&shape=circle&weight=900" />-->
-      <h1 class="p-mx-4">🦥 WuMBD</h1>
-    </template>
-  </Menubar>
-</template>
-
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
 import Menubar from 'primevue/menubar'
@@ -17,6 +8,7 @@ export default defineComponent({
   components: {
     Menubar,
   },
+
   setup() {
     return {
       items: reactive([
@@ -46,3 +38,12 @@ export default defineComponent({
   },
 })
 </script>
+
+<template>
+  <Menubar :model="items">
+    <template #start>
+      <!--      <img src="https://www.codeapi.io/initials/V?gradient=43aa8b,577590,45&shape=circle&weight=900" />-->
+      <h1 class="p-mx-4">🦥 WuMBD</h1>
+    </template>
+  </Menubar>
+</template>

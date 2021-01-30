@@ -1,26 +1,5 @@
-<template>
-  <svg viewBox="0 0 100 100" width="100%">
-    <circle r="50" cx="50" cy="50" class="background" />
-    <path
-      class="ring"
-      :stroke="color.dark"
-      d="M50 15 A1 1 0 0 1 50 85 A1 1 0 0 1 50 15"
-    />
-    <path
-      ref="path"
-      class="ring scale"
-      :stroke="color.light"
-      :stroke-dasharray="dashArray"
-      d="M50 15 A1 1 0 0 1 50 85 A1 1 0 0 1 50 15"
-    />
-    <text class="text" x="50" y="54">
-      {{ percent || 'NR' }}
-    </text>
-  </svg>
-</template>
-
 <script lang="ts">
-import { defineComponent, computed, toRefs, ref, onMounted } from 'vue'
+import { computed, defineComponent, onMounted, ref, toRefs } from 'vue'
 
 enum Rating {
   NONE = 'NONE',
@@ -89,6 +68,27 @@ export default defineComponent({
   },
 })
 </script>
+
+<template>
+  <svg viewBox="0 0 100 100" width="100%">
+    <circle r="50" cx="50" cy="50" class="background" />
+    <path
+      class="ring"
+      :stroke="color.dark"
+      d="M50 15 A1 1 0 0 1 50 85 A1 1 0 0 1 50 15"
+    />
+    <path
+      ref="path"
+      class="ring scale"
+      :stroke="color.light"
+      :stroke-dasharray="dashArray"
+      d="M50 15 A1 1 0 0 1 50 85 A1 1 0 0 1 50 15"
+    />
+    <text class="text" x="50" y="54">
+      {{ percent || 'NR' }}
+    </text>
+  </svg>
+</template>
 
 <style scoped lang="stylus">
 .background

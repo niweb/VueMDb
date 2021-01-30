@@ -1,7 +1,3 @@
-<template>
-  <img :src="src" :alt="alt" />
-</template>
-
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue'
 import { getImagePath, ImagePath } from '@/shared/services/movieApi'
@@ -13,10 +9,12 @@ export default defineComponent({
       required: false,
       default: null,
     },
+
     title: {
       type: String,
       required: true,
     },
+
     width: {
       type: Number,
       required: false,
@@ -43,3 +41,7 @@ export default defineComponent({
   },
 })
 </script>
+
+<template>
+  <img :src="src" :alt="alt" />
+</template>

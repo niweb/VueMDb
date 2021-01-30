@@ -1,12 +1,3 @@
-<template>
-  <nav>
-    <Navbar></Navbar>
-  </nav>
-  <main class="p-component">
-    <router-view />
-  </main>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Navbar from '@/app/layout/Navbar.vue'
@@ -17,6 +8,15 @@ export default defineComponent({
   },
 })
 </script>
+
+<template>
+  <nav>
+    <Navbar></Navbar>
+  </nav>
+  <main class="p-component">
+    <router-view />
+  </main>
+</template>
 
 <style scoped lang="stylus">
 #app

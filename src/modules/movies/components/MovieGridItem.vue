@@ -1,19 +1,3 @@
-<template>
-  <div class="card p-shadow-12">
-    <router-link :to="detailLink">
-      <Poster
-        :path="movie.posterPath"
-        :title="movie.title"
-        :width="200"
-      ></Poster>
-    </router-link>
-    <div class="content">
-      <Score class="score" :percent="movie.voteAverage * 10"></Score>
-      <span class="title">{{ movie.title }}</span>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 
@@ -48,6 +32,22 @@ export default defineComponent({
   },
 })
 </script>
+
+<template>
+  <div class="card p-shadow-12">
+    <router-link :to="detailLink">
+      <Poster
+        :path="movie.posterPath"
+        :title="movie.title"
+        :width="200"
+      ></Poster>
+    </router-link>
+    <div class="content">
+      <Score class="score" :percent="movie.voteAverage * 10"></Score>
+      <span class="title">{{ movie.title }}</span>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="stylus">
 .card
