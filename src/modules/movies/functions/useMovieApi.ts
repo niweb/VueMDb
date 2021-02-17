@@ -14,6 +14,8 @@ export const useMovieApi = <Response, Error = unknown>(
 ): HookData<Response, Error> => {
   const loading = ref(true)
 
+  console.log('useMovieApi', options)
+
   const { data, error } = useSWRV(
     () => `${endpoint}/${JSON.stringify(options)}`,
     async () => {

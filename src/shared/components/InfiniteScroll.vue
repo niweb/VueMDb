@@ -8,7 +8,19 @@ import {
 import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  emits: { infiniteScroll: null },
+  props: {
+    /**
+     * Amount of pixels remaining when firing {@see end} event
+     * When given number x, the event gets fired when the user is x pixels away from the bottom
+     */
+    pixelBuffer: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
+  },
+
+  emits: { end: null },
 
   setup(props, { emit }) {
     const el = ref(null)
@@ -20,8 +32,8 @@ export default defineComponent({
     debouncedWatch(
       [scrollPosition, documentHeight],
       () => {
-        if (scrollPosition.value >= documentHeight.value) {
-          emit('infiniteScroll')
+        if (scrollPosition.value >= documentHeight.value - props.pixelBuffer) {
+          emit('end')
         }
       },
       { debounce: 500 }
