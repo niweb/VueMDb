@@ -1,7 +1,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, reactive, ref, watch } from 'vue'
 
-import { useMovieApi } from '@/modules/movies/hooks/useMovieApi'
+import { useMovieApi } from '@/shared/services/useMovieApi'
 import { MultiPageResponse } from '@/shared/services/movieApi'
 import { PartialMovie } from '@/modules/movies/types/movies'
 import { PartialShow } from '@/modules/movies/types/shows'
