@@ -1,4 +1,4 @@
-import { computed, Ref, watch } from 'vue'
+import { computed, Ref } from 'vue'
 import useSWRV from 'swrv'
 import { movieApi, RequestOptions } from '@/shared/services/movieApi'
 
