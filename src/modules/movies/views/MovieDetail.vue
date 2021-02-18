@@ -1,11 +1,12 @@
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, PropType, ref } from 'vue'
 
-import { useMovieApi } from '@/modules/movies/functions/useMovieApi'
-import { FullMovie } from '@/modules/movies/types'
+import { useMovieApi } from '@/modules/movies/hooks/useMovieApi'
+import { FullMovie } from '@/modules/movies/types/movies'
 import Poster from '@/modules/movies/components/Poster.vue'
 import CoverImage from '@/modules/movies/components/CoverImage.vue'
 import Score from '@/modules/movies/components/Score.vue'
+import { WatchableType } from '@/modules/movies/types'
 
 export default defineComponent({
   components: {
@@ -19,12 +20,27 @@ export default defineComponent({
       type: Number,
       required: true,
     },
+
+    itemType: {
+      type: String as PropType<WatchableType>,
+      required: true,
+    },
   },
 
   setup(props) {
     const root = ref(null)
+
+    const isMovie = computed(() => props.itemType === WatchableType.Movie)
+    const isShow = computed(() => props.itemType === WatchableType.Show)
+
+    const endpoint = computed(() => {
+      if (isMovie.value) return 'movie'
+      if (isShow.value) return 'tv'
+      return 'unknown'
+    })
+
     const { data, error, loading } = useMovieApi<FullMovie>(
-      `/movie/${props.id}`
+      `/${endpoint.value}/${props.id}`
     )
 
     return {
@@ -45,14 +61,18 @@ export default defineComponent({
         <Poster
           class="p-mx-3 poster"
           :width="300"
-          :title="data?.title"
+          :title="data.title || data.name"
           :path="data?.posterPath"
         ></Poster>
         <div class="p-mx-6">
           <div class="p-d-flex p-align-baseline">
             <h2>
-              <span class="title p-mr-4">{{ data.title }}</span>
-              <span class="year">({{ data.releaseDate.split('-')[0] }})</span>
+              <span class="title p-mr-4">{{ data.title || data.name }}</span>
+              <span class="year"
+                >({{
+                  (data.releaseDate || data.firstAirDate)?.split('-')[0]
+                }})</span
+              >
             </h2>
           </div>
           <h3 v-if="data.tagline" class="tagline p-mt-0 p-mb-2">

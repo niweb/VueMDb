@@ -2,7 +2,7 @@
 import { defineComponent, reactive } from 'vue'
 import Menubar from 'primevue/menubar'
 
-import { PATH_NAMES } from '@/shared/constants/path-names'
+import { PathNames } from '@/shared/constants/path-names'
 
 export default defineComponent({
   components: {
@@ -17,19 +17,40 @@ export default defineComponent({
           items: [
             {
               label: 'Now Playing',
-              to: { name: PATH_NAMES.NOW_PLAYING },
+              to: { name: PathNames.MOVIES_NOW_PLAYING },
             },
             {
               label: 'Popular',
-              to: { name: PATH_NAMES.POPULAR },
+              to: { name: PathNames.MOVIES_POPULAR },
             },
             {
               label: 'Top Rated',
-              to: { name: PATH_NAMES.TOP_RATED },
+              to: { name: PathNames.MOVIES_TOP_RATED },
             },
             {
               label: 'Upcoming',
-              to: { name: PATH_NAMES.UPCOMING },
+              to: { name: PathNames.MOVIES_UPCOMING },
+            },
+          ],
+        },
+        {
+          label: 'Shows',
+          items: [
+            {
+              label: 'Popular',
+              to: { name: PathNames.SHOWS_POPULAR },
+            },
+            {
+              label: 'Top Rated',
+              to: { name: PathNames.SHOWS_TOP_RATED },
+            },
+            {
+              label: 'Airing soon',
+              to: { name: PathNames.SHOWS_AIRING_SOON },
+            },
+            {
+              label: 'Airing today',
+              to: { name: PathNames.SHOWS_AIRING_TODAY },
             },
           ],
         },

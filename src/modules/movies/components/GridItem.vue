@@ -1,11 +1,11 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 
-import { PartialMovie } from '@/modules/movies/types'
 import Poster from '@/modules/movies/components/Poster.vue'
 
-import { PATH_NAMES } from '@/shared/constants/path-names'
+import { PathNames } from '@/shared/constants/path-names'
 import Score from '@/modules/movies/components/Score.vue'
+import { ImagePath } from '@/shared/services/movieApi'
 
 export default defineComponent({
   components: {
@@ -14,18 +14,38 @@ export default defineComponent({
   },
 
   props: {
-    movie: {
-      type: Object as PropType<PartialMovie>,
+    id: {
+      type: Number,
       required: true,
+    },
+
+    title: {
+      type: String,
+      required: true,
+    },
+
+    detailLinkName: {
+      type: String as PropType<PathNames>,
+      required: true,
+    },
+
+    posterPath: {
+      type: String as PropType<ImagePath>,
+      required: true,
+    },
+
+    voteAverage: {
+      type: Number,
+      default: NaN,
     },
   },
 
   setup(props) {
     return {
       detailLink: {
-        name: PATH_NAMES.MOVIE,
+        name: props.detailLinkName,
         params: {
-          id: props.movie.id,
+          id: props.id,
         },
       },
     }
@@ -36,15 +56,11 @@ export default defineComponent({
 <template>
   <div class="card p-shadow-12">
     <router-link :to="detailLink">
-      <Poster
-        :path="movie.posterPath"
-        :title="movie.title"
-        :width="500"
-      ></Poster>
+      <Poster :path="posterPath" :title="title" :width="500"></Poster>
     </router-link>
     <div class="content">
-      <Score class="score" :percent="movie.voteAverage * 10"></Score>
-      <span class="title">{{ movie.title }}</span>
+      <Score class="score" :percent="voteAverage * 10"></Score>
+      <span class="title">{{ title }}</span>
     </div>
   </div>
 </template>

@@ -1,9 +1,10 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import { PATH_NAMES } from '@/shared/constants/path-names'
+import { PathNames } from '@/shared/constants/path-names'
+import { WatchableType } from '@/modules/movies/types'
 
 const MovieCollection = () =>
   import(
-    /* webpackChunkName: "movie-collection" */ '@/modules/movies/views/MovieCollection.vue'
+    /* webpackChunkName: "movie-collection" */ '@/modules/movies/views/Collection.vue'
   )
 
 const EmptyComponent = () =>
@@ -14,61 +15,135 @@ const EmptyComponent = () =>
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: PATH_NAMES.HOME,
-    redirect: { name: PATH_NAMES.POPULAR },
+    name: PathNames.HOME,
+    redirect: { name: PathNames.MOVIES_POPULAR },
   },
   {
     path: '/movie/:id',
-    name: PATH_NAMES.MOVIE,
+    name: PathNames.MOVIE,
     component: () =>
       import(
         /* webpackChunkName: "movie-detail" */ '@/modules/movies/views/MovieDetail.vue'
       ),
-    props: true,
+    props(route) {
+      return {
+        id: Number(route.params.id),
+        itemType: WatchableType.Movie,
+      }
+    },
   },
   {
     path: '/movies',
-    name: PATH_NAMES.MOVIES,
+    name: PathNames.MOVIES,
     component: EmptyComponent,
     children: [
       {
         path: 'popular',
-        name: PATH_NAMES.POPULAR,
+        name: PathNames.MOVIES_POPULAR,
         component: MovieCollection,
         props: {
           title: 'Popular Movies',
           endpoint: 'movie/popular',
           key: 'movie/popular',
+          itemType: WatchableType.Movie,
         },
       },
       {
         path: 'now-playing',
-        name: PATH_NAMES.NOW_PLAYING,
+        name: PathNames.MOVIES_NOW_PLAYING,
         component: MovieCollection,
         props: {
           title: 'Now Playing Movies',
           endpoint: 'movie/now_playing',
           key: 'movie/now_playing',
+          itemType: WatchableType.Movie,
         },
       },
       {
         path: 'top-rated',
-        name: PATH_NAMES.TOP_RATED,
+        name: PathNames.MOVIES_TOP_RATED,
         component: MovieCollection,
         props: {
           title: 'Top Rated Movies',
           endpoint: 'movie/top_rated',
           key: 'movie/top_rated',
+          itemType: WatchableType.Movie,
         },
       },
       {
         path: 'upcoming',
-        name: PATH_NAMES.UPCOMING,
+        name: PathNames.MOVIES_UPCOMING,
         component: MovieCollection,
         props: {
           title: 'Upcoming Movies',
           endpoint: 'movie/upcoming',
           key: 'movie/upcoming',
+          itemType: WatchableType.Movie,
+        },
+      },
+    ],
+  },
+  {
+    path: '/show/:id',
+    name: PathNames.SHOW,
+    component: () =>
+      import(
+        /* webpackChunkName: "movie-detail" */ '@/modules/movies/views/MovieDetail.vue'
+      ),
+    props(route) {
+      return {
+        id: Number(route.params.id),
+        itemType: WatchableType.Show,
+      }
+    },
+  },
+  {
+    path: '/shows',
+    name: PathNames.SHOWS,
+    component: EmptyComponent,
+    children: [
+      {
+        path: 'popular',
+        name: PathNames.SHOWS_POPULAR,
+        component: MovieCollection,
+        props: {
+          title: 'Popular Shows',
+          endpoint: 'tv/popular',
+          key: 'tv/popular',
+          itemType: WatchableType.Show,
+        },
+      },
+      {
+        path: 'top-rated',
+        name: PathNames.SHOWS_TOP_RATED,
+        component: MovieCollection,
+        props: {
+          title: 'Top Rated Shows',
+          endpoint: 'tv/top_rated',
+          key: 'tv/top_rated',
+          itemType: WatchableType.Show,
+        },
+      },
+      {
+        path: 'airing-soon',
+        name: PathNames.SHOWS_AIRING_SOON,
+        component: MovieCollection,
+        props: {
+          title: 'Shows airing soon',
+          endpoint: 'tv/on_the_air',
+          key: 'tv/on_the_air',
+          itemType: WatchableType.Show,
+        },
+      },
+      {
+        path: 'airing-today',
+        name: PathNames.SHOWS_AIRING_TODAY,
+        component: MovieCollection,
+        props: {
+          title: 'Shows airing today',
+          endpoint: 'tv/airing_today',
+          key: 'tv/airing_today',
+          itemType: WatchableType.Show,
         },
       },
     ],
@@ -76,7 +151,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     // https://next.router.vuejs.org/guide/migration/#removed-star-or-catch-all-routes
     path: '/:pathMatch(.*)*',
-    name: PATH_NAMES.NOT_FOUND,
+    name: PathNames.NOT_FOUND,
     component: () =>
       import(/* webpackChunkName: "404" */ '@/shared/views/404.vue'),
     props: true,
