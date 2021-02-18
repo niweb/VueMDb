@@ -1,4 +1,4 @@
-import { Ref, ref } from 'vue'
+import { computed, Ref, watch } from 'vue'
 import useSWRV from 'swrv'
 import { movieApi, RequestOptions } from '@/shared/services/movieApi'
 
@@ -12,17 +12,12 @@ export const useMovieApi = <Response, Error = unknown>(
   endpoint: string,
   options?: RequestOptions
 ): HookData<Response, Error> => {
-  const loading = ref(true)
-
-  console.log('useMovieApi', options)
-
-  const { data, error } = useSWRV(
+  const { data, error, isValidating } = useSWRV(
     () => `${endpoint}/${JSON.stringify(options)}`,
     async () => {
       const response = await movieApi.get<Response>(endpoint, {
         params: options,
       })
-      loading.value = false
       return response.data
     },
     {
@@ -30,6 +25,9 @@ export const useMovieApi = <Response, Error = unknown>(
       dedupingInterval: 10000,
     }
   )
+
+  const isPending = computed(() => data.value === undefined && !error.value)
+  const loading = computed(() => isValidating.value || isPending.value)
 
   return {
     loading,

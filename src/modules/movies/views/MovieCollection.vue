@@ -69,7 +69,7 @@ export default defineComponent({
   <div v-if="error">
     {{ error }}
   </div>
-  <InfiniteScroll :pixel-buffer="1250" @end="loadMore">
+  <InfiniteScroll :loading="loading" :pixel-buffer="1250" @end="loadMore">
     <div class="p-grid p-jc-evenly">
       <MovieGridItem
         v-for="movie in movies"

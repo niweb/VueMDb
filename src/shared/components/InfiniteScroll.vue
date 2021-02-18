@@ -6,8 +6,13 @@ import {
   useWindowSize,
 } from '@vueuse/core'
 import { computed, defineComponent, ref } from 'vue'
+import ProgressSpinner from 'primevue/progressspinner'
 
 export default defineComponent({
+  components: {
+    ProgressSpinner,
+  },
+
   props: {
     /**
      * Amount of pixels remaining when firing {@see end} event
@@ -17,6 +22,15 @@ export default defineComponent({
       type: Number,
       required: false,
       default: 0,
+    },
+
+    /**
+     * Show a loading spinner below the content while new data gets fetched
+     */
+    loading: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
 
@@ -33,7 +47,10 @@ export default defineComponent({
       [scrollPosition, documentHeight],
       () => {
         if (scrollPosition.value >= documentHeight.value - props.pixelBuffer) {
-          emit('end')
+          // do not fire event while new content already gets fetched
+          if (!props.loading) {
+            emit('end')
+          }
         }
       },
       { debounce: 500 }
@@ -48,4 +65,7 @@ export default defineComponent({
 
 <template>
   <slot></slot>
+  <div v-show="loading" class="p-d-flex p-ac-center p-jc-center p-py-6">
+    <ProgressSpinner></ProgressSpinner>
+  </div>
 </template>
