@@ -4,7 +4,7 @@ import { defineComponent, PropType } from 'vue'
 import Rating from 'primevue/rating'
 import Tag from 'primevue/tag'
 
-import { PartialMovie } from '@/modules/movies/types'
+import { PartialMovie } from '@/modules/movies/types/movies'
 import Poster from '@/modules/movies/components/Poster.vue'
 
 export default defineComponent({
