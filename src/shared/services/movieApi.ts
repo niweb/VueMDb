@@ -15,8 +15,9 @@ export type MultiPageResponse<Item> = {
 }
 
 export type RequestOptions = Partial<{
-  language?: string
-  page?: number
+  language: string
+  page: number
+  query: string
 }>
 
 export const movieApi = applyCaseMiddleware(

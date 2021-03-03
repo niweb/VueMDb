@@ -3,9 +3,11 @@ import { defineComponent, reactive } from 'vue'
 import Menubar from 'primevue/menubar'
 
 import { PathNames } from '@/shared/constants/path-names'
+import SearchBar from '@/shared/components/SearchBar.vue'
 
 export default defineComponent({
   components: {
+    SearchBar,
     Menubar,
   },
 
@@ -65,6 +67,9 @@ export default defineComponent({
     <template #start>
       <!--      <img src="https://www.codeapi.io/initials/V?gradient=43aa8b,577590,45&shape=circle&weight=900" />-->
       <h1 class="p-mx-4">🦥 WuMBD</h1>
+    </template>
+    <template #end>
+      <SearchBar />
     </template>
   </Menubar>
 </template>

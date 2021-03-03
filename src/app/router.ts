@@ -26,9 +26,11 @@ const routes: Array<RouteRecordRaw> = [
         /* webpackChunkName: "movie-detail" */ '@/modules/movies/views/MovieDetail.vue'
       ),
     props(route) {
+      const id = Number(route.params.id)
       return {
-        id: Number(route.params.id),
+        id,
         itemType: WatchableType.Movie,
+        key: `movie-${id}`,
       }
     },
   },
@@ -91,9 +93,11 @@ const routes: Array<RouteRecordRaw> = [
         /* webpackChunkName: "movie-detail" */ '@/modules/movies/views/MovieDetail.vue'
       ),
     props(route) {
+      const id = Number(route.params.id)
       return {
-        id: Number(route.params.id),
+        id,
         itemType: WatchableType.Show,
+        key: `show-${id}`,
       }
     },
   },

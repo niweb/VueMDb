@@ -1,7 +1,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
 
-import { useMovieApi } from '@/modules/movies/hooks/useMovieApi'
+import { useMovieApi } from '@/shared/services/useMovieApi'
 import { FullMovie } from '@/modules/movies/types/movies'
 import Poster from '@/modules/movies/components/Poster.vue'
 import CoverImage from '@/modules/movies/components/CoverImage.vue'
@@ -85,7 +85,6 @@ export default defineComponent({
         </div>
       </div>
     </CoverImage>
-    <pre>{{ data }}</pre>
   </template>
 </template>
 
