@@ -85,7 +85,6 @@ export default defineComponent({
         </div>
       </div>
     </CoverImage>
-    <pre>{{ data }}</pre>
   </template>
 </template>
 

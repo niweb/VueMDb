@@ -76,8 +76,8 @@ export default defineComponent({
             :title="slotProps.item.title"
             :width="92"
           ></Poster>
-          <div class="p-px-3">
-            <div class="p-text-bold">
+          <div class="p-pl-3 p-pr-1 autocomplete-suggestion-details">
+            <div class="p-text-bold p-text-nowrap p-text-truncate">
               {{ slotProps.item.title }}
             </div>
             <div>
@@ -91,19 +91,21 @@ export default defineComponent({
 </template>
 
 <style lang="stylus">
-.autocomplete-wrapper
-  position relative
-
-  i
-    position absolute
-    z-index 1
+.autocomplete-wrapper i
+  position absolute
+  z-index 1
 
 .autocomplete input
   padding-left 1.75rem
 
 .autocomplete-suggestion-item
-  max-width 400px
+  width 300px
+  overflow hidden
 
 .autocomplete-suggestion-image
   height 90px
+
+.autocomplete-suggestion-details
+  flex 1 1 auto
+  width 1px
 </style>
