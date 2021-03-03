@@ -10,15 +10,18 @@ type HookData<Data, Error> = {
 
 export const useMovieApi = <Response, Error = unknown>(
   endpoint: string,
-  options?: RequestOptions
+  options?: RequestOptions,
+  condition?: () => boolean
 ): HookData<Response, Error> => {
   const { data, error, isValidating } = useSWRV(
     () => `${endpoint}/${JSON.stringify(options)}`,
     async () => {
-      const response = await movieApi.get<Response>(endpoint, {
-        params: options,
-      })
-      return response.data
+      if (!condition || condition()) {
+        const response = await movieApi.get<Response>(endpoint, {
+          params: options,
+        })
+        return response.data
+      }
     },
     {
       revalidateOnFocus: false,

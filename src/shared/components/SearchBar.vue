@@ -1,30 +1,14 @@
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import AutoComplete from 'primevue/autocomplete/AutoComplete'
-import { useMovieApi } from '@/shared/services/useMovieApi'
-import { PartialMovie, PartialShow } from '@/modules/movies/types'
-import { ImagePath, MultiPageResponse } from '@/shared/services/movieApi'
 import Poster from '@/modules/movies/components/Poster.vue'
 import { PathNames } from '@/shared/constants/path-names'
 import { useRouter } from 'vue-router'
-
-enum MediaType {
-  Movie = 'movie',
-  Tv = 'tv',
-  Person = 'person',
-}
-
-type ApiResult = (PartialShow | PartialMovie) & {
-  mediaType: MediaType
-}
-
-type Suggestion = {
-  type: MediaType
-  id: number
-  posterPath: ImagePath | null
-  title: string
-  year: string
-}
+import {
+  MediaType,
+  Suggestion,
+  useMovieApiSearch,
+} from '@/shared/services/useMovieApiSearch'
 
 export default defineComponent({
   components: {
@@ -37,40 +21,11 @@ export default defineComponent({
     const query = ref<string>('')
     const value = ref<Suggestion | string | null>(null)
 
-    const { data } = useMovieApi<MultiPageResponse<ApiResult>>(
-      '/search/multi',
-      reactive({
-        query,
-      })
-    )
-
-    const suggested = computed(() => {
-      if (!data.value) return []
-      return data.value.results
-        .filter(
-          // Only include supported media types
-          (item) =>
-            item.mediaType === MediaType.Movie ||
-            item.mediaType === MediaType.Tv
-        )
-        .map(
-          // Map complex result to slimmer object, that can be more easily consumed across this component
-          (item: ApiResult) => ({
-            type: item.mediaType,
-            id: item.id,
-            posterPath: item.posterPath,
-            title: (item as PartialMovie).title || (item as PartialShow).name,
-            year: (
-              (item as PartialMovie).releaseDate ||
-              (item as PartialShow).firstAirDate
-            )?.split('-')[0],
-          })
-        )
-    })
+    const { suggestions } = useMovieApiSearch(query)
 
     return {
       selected: value,
-      suggested,
+      suggested: suggestions,
 
       search(inputValue: string) {
         if (inputValue.trim().length > 0) {
