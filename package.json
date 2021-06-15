@@ -12,7 +12,7 @@
   "dependencies": {
     "@types/axios": "0.14.0",
     "@types/axios-case-converter": "0.3.1",
-    "@vueuse/core": "4.0.11",
+    "@vueuse/core": "5.0.3",
     "axios": "0.21.1",
     "axios-case-converter": "0.7.0",
     "core-js": "3.8.3",
