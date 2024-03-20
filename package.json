@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@types/axios": "0.14.0",
-    "@types/axios-case-converter": "0.3.1",
+    "@types/axios-case-converter": "0.4.0",
     "@vueuse/core": "4.0.11",
     "axios": "0.21.1",
-    "axios-case-converter": "0.7.0",
+    "axios-case-converter": "0.11.1",
     "core-js": "3.8.3",
     "primeflex": "2.0.0",
     "primeicons": "4.1.0",
